@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from . forms import UserCreationForm
 from django.shortcuts import redirect, render
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 def signup_view(request):
@@ -17,5 +17,18 @@ def signup_view(request):
 
     return render(request, 'signupform.html', {'form': form})        
 
-# Create your views here.
+
+def login_view(request):
+    if request.method=='POST': #esko 2 ta methoid hunxa get garda ni hunxa request.POST.get('username') kei data xaina vane nine dinxa
+        username=request.POST['username']
+        password= request.POST['password']
+        user= authenticate(request, username=username, password=password)
+
+        if user:
+            login(request, user)
+            return redirect('dashboard')
+        else:
+             return render(request, 'signupform.html')
+        
+    return render(request, 'login.html')   
 

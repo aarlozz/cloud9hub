@@ -12,3 +12,4 @@ class SignupForm(UserCreationForm):
         fields=['username','email', 'password1','password2']
 
 #form ma widget use garera forntend use garney
+

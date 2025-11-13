@@ -9,7 +9,7 @@ class Profile(models.Model):
         return f"{self.user.username}- {self.petname}"
     
 class Event(models.Model):
-    profile= models.ForeignKey(Profile, related_name="event", on_delete=models.CASCADE)
+    profile= models.ForeignKey(Profile, related_name="event", on_delete=models.CASCADE,default=1)
     event_title= models.CharField(max_length=25,  default="title", blank='False')
     rating=models.IntegerField(max_length=10, blank=True, null=True) 
     #for rating we can also use PositiveSmallIntegerField

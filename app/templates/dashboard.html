@@ -1,0 +1,38 @@
+{% load static%} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Dashboard</title>
+</head>
+<body>
+    <h1>Welcome to Your Event Dashboard</h1>
+    <p>Here you can manage your events and view details.</p>
+    <a href="{% url 'create_event' %}">Create New Event</a>
+    <br>
+    <br>
+    <h2>Upcoming Events</h2>
+
+    {% if events %}
+        <ul>
+            {% for event in events %}
+                <li>
+                    <strong>Event Title:{{ event.event_title }}</strong><br>
+                    Event Desc: {{ event.description }}
+                    <br>
+                    Created at: {{ event.created_at }}
+                    <br>
+                    Created by: {{event.profile.user.username}}
+                </li>
+                <br>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No events found.</p>
+    {% endif %}
+    <br>
+    <a href="{% url 'logout' %}">Logout</a>
+    
+</body>
+</html>

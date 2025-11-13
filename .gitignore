@@ -3,11 +3,9 @@ __pycache__/
 *.py[cod]
 *.so
 
-# Virtual environments
+# Virtual environment
 venv/
 env/
-myproject/           # <-- ignore your virtual environment folder
-.venv/
 *.env
 
 # Django stuff
@@ -26,4 +24,8 @@ staticfiles/
 Thumbs.db
 
 # Environment variables or secrets
-.env
+venv/
+myproject/
+.env/
+
+

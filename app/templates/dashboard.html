@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-slate-200 m-4">
+
+    <div class="conatiner"></div>
+
+    <div class="p-4 container h-screen w-screen bg-blue-300 flex gap-6 rounded-xl">
+<!--Event box-->
+    <div class="container bg-purple-400 rounded-xl p-2">
+
+        <button class="rounded-lg mx-auto block bg--400 bg-green-300 p-4 border-4 border-solid border-red-600 hover:bg-pink-200 hover:text-orange-500 hover:border-white" onclick="addtaskandshowform()"> <strong>Add Event</strong></button>
+    </div>
+
+
+    <div class="eventform hidden ">
+        <div class=""addevent-container>
+        <form method="post">
+            {% csrf_token %}
+            <label for="event_title">Event title:</label>
+            <input type="text" name="event_title" id="event_title">
+
+            <label for="rating">Rating:</label>
+            <input type="number" name="rating" id="rating">
+
+            <label for="created_by">Created by:</label>
+            <input type="text" name="created_by" id="created_by">
+
+            <textarea name="description" id="description">description of event</textarea>
+
+            <button type="submit"> Submit task</button>
+
+            
+            </form>
+        <button onclick="addevent()">Add another event</button>
+        </div>
+        </div>
+
+        
+
+
+
+
+
+
+
+    <!--Task Box-->
+
+
+    <div class="container bg-orange-400 rounded-xl p-2">
+<button class="rounded-lg bg--400 mx-auto block bg-green-300 p-4 border-4 border-solid border-red-600 hover:bg-pink-200 hover:text-orange-500 hover:border-white"> <strong>Add Task</strong></button>
+    </div>
+</div>
+
+  </body>
+
+    <script>
+
+        function addtaskandshowform(){
+            document.querySelector('.eventform').classList.toggle('hidden')
+
+
+        }
+
+      function addevent() {
+        const eventbox = document.querySelector(".eventadd-container");
+
+        // prevent creating many inputs on every click
+        if (document.getElementById("event_title")) return;
+
+        let eventadd_title = document.createElement("input");
+        eventadd_title.type = "text";
+        eventadd_title.id = "event_title";
+        eventadd_title.name = "event_title";
+        eventadd_title.placeholder = "Enter the event";
+        eventadd_title.className = "border p-2 rounded w-full mt-4 bg-white";
+
+        eventbox.appendChild(eventadd_title);
+      }
+    </script>
+  </body>
+</html>

@@ -3,6 +3,7 @@ from . forms import UserCreationForm
 from django.shortcuts import redirect, render
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from . models import Event
 
 def signup_view(request):
     if request.method=='POST':
@@ -32,3 +33,17 @@ def login_view(request):
         
     return render(request, 'login.html')   
 
+def dashboard_view(request):
+     
+    profile= request.user.profile
+
+    if request.method=="POST":
+        event_title= request.POST.get('event_title')
+        rating= request.POST.get('rating')
+        created_by= request.POST.get('created_by')
+        description= request.POST.get('description')
+
+        Event.objects.create(profile=profile, event_title=event_title, rating=rating, created_by=created_by, description=description)
+    event=Event.objects.filter()
+
+    return render(request, 'dashboard.html', {'profile':profile, 'event':event})    

@@ -1,0 +1,93 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud9Hub</title>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    input, textarea, select {
+        color: #000 !important;              /* Black text */
+        background-color: #fff !important;   /* White background */
+    }
+
+    input::placeholder, textarea::placeholder {
+        color: #777 !important;
+    }
+  </style>
+
+</head>
+<body class="min-h-screen bg-gradient-to-r from-indigo-500 to-purple-600 flex flex-col font-sans text-white">
+
+  <!-- Header -->
+  <header class="py-8 text-center bg-black/20">
+    <h1 class="text-4xl font-bold mb-2">Welcome to Cloud9Hub</h1>
+    <p class="text-lg">Your personal dashboard for events and tasks management</p>
+  </header>
+
+ <!-- Navigation -->
+<nav class="my-6 flex justify-center gap-4 items-center">
+
+  {% if user.is_authenticated %}
+      <!-- Logged-in Navigation -->
+
+      <a href="{% url 'event-list' %}" 
+         class="bg-black/30 px-4 py-2 rounded-md hover:bg-white/20 transition">
+          Events
+      </a>
+
+      <a href="{% url 'task-list' %}" 
+         class="bg-black/30 px-4 py-2 rounded-md hover:bg-white/20 transition">
+          Tasks
+      </a>
+
+      <!-- Logout (POST only) -->
+      <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button type="submit" 
+            class="bg-red-500 px-4 py-2 rounded-md hover:bg-red-600 transition text-white">
+              Logout
+          </button>
+      </form>
+
+  {% else %}
+      <!-- Not Logged-in Navigation -->
+      <a href="{% url 'login' %}" 
+         class="bg-black/30 px-4 py-2 rounded-md hover:bg-white/20 transition">
+          Login
+      </a>
+
+      <a href="{% url 'signup' %}" 
+         class="bg-black/30 px-4 py-2 rounded-md hover:bg-white/20 transition">
+          Sign Up
+      </a>
+  {% endif %}
+
+</nav>
+
+  <!-- Main Content -->
+  <main class="flex-1 flex justify-center items-start py-10 px-4">
+    <div class="w-full max-w-5xl">
+      {% block content %}
+      <!-- Default landing content -->
+      <div class="text-center space-y-4">
+        <h2 class="text-3xl font-bold">Organize, Track, Achieve!</h2>
+        <p class="text-lg max-w-xl mx-auto">
+          Cloud9Hub helps you manage your personal events and tasks efficiently.
+          Stay on top of your schedule and never miss a deadline again.
+        </p>
+      </div>
+      {% endblock %}
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-4 text-center bg-black/20">
+    &copy; 2025 Cloud9Hub. All rights reserved.
+  </footer>
+
+</body>
+</html>

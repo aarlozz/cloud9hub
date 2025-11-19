@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<div class="max-w-3xl mx-auto bg-white shadow-lg rounded-xl p-10 mt-10">
+    <h1 class="text-3xl font-bold text-gray-900 mb-6 text-center">{{ title }}</h1>
+
+    <form method="POST" class="flex flex-col gap-6">
+        {% csrf_token %}
+
+        <div>
+            <label class="font-medium text-gray-700">Task Title</label>
+            {{ form.task_title|add_class:"w-full border rounded-lg p-3 focus:ring-2 focus:ring-orange-400" }}
+        </div>
+
+        <div>
+            <label class="font-medium text-gray-700">Rating</label>
+            {{ form.rating|add_class:"w-full border rounded-lg p-3 focus:ring-2 focus:ring-orange-400" }}
+        </div>
+
+        <div>
+            <label class="font-medium text-gray-700">Deadline</label>
+            {{ form.deadline|add_class:"w-full border rounded-lg p-3 focus:ring-2 focus:ring-orange-400" }}
+        </div>
+
+        <button class="bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600 transition">
+            Save Task
+        </button>
+    </form>
+</div>
+
+{% endblock %}
